@@ -6,17 +6,18 @@ from BackupHandler import BackupHandler
 def main():
 
     parser = argparse.ArgumentParser(description="Backup utility")
-    subparsers = parser.add_subparsers(help="Backup commands")
+    subparsers = parser.add_subparsers(help="Backup commands", required=True)
 
     backupStarter = subparsers.add_parser("start", help="Start the backup cycle")
-    backupStarter.add_argument("-i", "--interval", help="Interval between backup cycles in seconds")
-    backupStarter.add_argument("-b", "--backup", help="Backup directory")
-    backupStarter.add_argument("-s", "--source", help="Source directory")
-    backupStarter.add_argument("-a", "--algo", help="Hashing algorithm to use", default="md5")
-    backupStarter.add_argument("-m", "--manager", help="Backup manager to use", default="fileSystem")
-    backupStarter.add_argument("-l", "--log", help="Log file", default="backup.log")
+    backupStarter.add_argument("-i", "--interval", help="Interval between backup cycles in seconds", default=600, type=float)
+    backupStarter.add_argument("-b", "--backup", help="Backup directory", required=True)
+    backupStarter.add_argument("-s", "--source", help="Source directory", required=True)
+    backupStarter.add_argument("-a", "--algo", help="Hashing algorithm to use", default="md5", choices=["md5", "sha256", "sha512"])
+    backupStarter.add_argument("-m", "--manager", help="Backup manager to use", default="fileSystem", choices=["fileSystem"])
+    backupStarter.add_argument("-l", "--log", help="Log file", default="safe.log")
 
     args = parser.parse_args()
+
     args.backup = args.backup.rstrip("/")
     args.source = args.source.rstrip("/")
 
@@ -28,7 +29,7 @@ def main():
     logger.info("Backup directory was set to %s" % args.backup)
     logger.info("Source directory was set to %s" % args.source)
 
-    backupHandler = BackupHandler(float(args.interval), args.backup, args.source, args.algo, args.manager)
+    backupHandler = BackupHandler(args.interval, args.backup, args.source, args.algo, args.manager)
 
     logger.info("Starting continuous backup")
     try:
