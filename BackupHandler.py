@@ -5,7 +5,7 @@ from configparser import ConfigParser
 from HashGenerators import MD5Generator, SHA256Generator, SHA512Generator
 from FileHandler import FileSystemHandler
 
-logger = logging.getLogger('backup')
+logger = logging.getLogger('SAFE')
 
 class BackupHandler:
 
