@@ -32,6 +32,9 @@ def main():
     logger.info("Backup interval was set to %s seconds" % args.interval)
     logger.info("Backup directory was set to %s" % args.backup)
     logger.info("Source directory was set to %s" % args.source)
+    logger.info("Hashing algorithm was set to %s" % args.algo)
+    logger.info("Backup manager was set to %s" % args.manager)
+    logger.info("Log file was set to %s" % args.log)
 
     backupHandler = BackupHandler(args.interval, args.backup, args.source, args.algo, args.manager)
 
@@ -44,7 +47,7 @@ def main():
 def setupLogging(logFile: str):
 
     # Create a logger
-    logger = logging.getLogger("backup")
+    logger = logging.getLogger("SAFE")
     logger.setLevel(logging.DEBUG)
 
     # Create a console handler
