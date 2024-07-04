@@ -35,7 +35,6 @@ def main():
 
     backupHandler = BackupHandler(args.interval, args.backup, args.source, args.algo, args.manager)
 
-    logger.info("Starting continuous backup")
     try:
         backupHandler.run()
     except KeyboardInterrupt:

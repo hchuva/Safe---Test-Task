@@ -47,9 +47,15 @@ class BackupHandler:
         return self.backupStrategies[strategy]
     
     def run(self):
+
+        logger.info("Backup Handler started")
+        logger.info("Executing initial backup")
+        self.__backupSource()
+
+        logger.info("Starting continuous backup. Backup interval is %s seconds", self.backupInterval)
         while True:
             if time.time() - self.lastBackup >= self.backupInterval:
-                logger.info("Backup Interval reached. Running backup")
+                logger.info("Starting a new backup")
                 self.lastBackup = time.time()
                 self.__backupSource()
 
