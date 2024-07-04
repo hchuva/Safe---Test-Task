@@ -70,7 +70,7 @@ class BackupHandler:
             #    hashedData = self.hashAlgorithm.hashFile(data)
             #    hashedFiles[file] = hashedData
             fileData, _ = self.backupStrategy.ReadFile(path + "/" + file)
-            hashedData = self.hashAlgorithm.hashFile(fileData)
+            hashedData = self.hashAlgorithm.hashFile(fileList[file]['path'] + fileList[file]['file'] + fileData)
             fileList[file]["hash"] = hashedData
 
         return fileList
