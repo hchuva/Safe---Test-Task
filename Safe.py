@@ -6,7 +6,7 @@ from BackupHandler import BackupHandler
 def main():
 
     parser = argparse.ArgumentParser(description="Backup utility")
-    subparsers = parser.add_subparsers(help="Backup commands", required=True)
+    subparsers = parser.add_subparsers(help="Backup commands", required=True, dest="command")
 
     backupStarter = subparsers.add_parser("start", help="Start the backup cycle")
     backupStarter.add_argument("-i", "--interval", help="Interval between backup cycles in seconds", default=600, type=float)
@@ -17,6 +17,10 @@ def main():
     backupStarter.add_argument("-l", "--log", help="Log file", default="safe.log")
 
     args = parser.parse_args()
+
+    if args.command is None:
+        parser.print_help()
+        exit(1)
 
     args.backup = args.backup.rstrip("/")
     args.source = args.source.rstrip("/")
