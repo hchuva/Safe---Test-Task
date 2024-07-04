@@ -1,7 +1,5 @@
 import time
-import os
 import logging
-from configparser import ConfigParser
 from HashGenerators import MD5Generator, SHA256Generator, SHA512Generator
 from FileHandler import FileSystemHandler
 
