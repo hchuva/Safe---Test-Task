@@ -2,7 +2,7 @@ import time
 import os
 import logging
 from configparser import ConfigParser
-from HashGenerators import MD5Generator, SHA256Generator, CRC32Generator
+from HashGenerators import MD5Generator, SHA256Generator, SHA512Generator
 from FileHandler import FileSystemHandler
 
 logger = logging.getLogger('backup')
@@ -12,7 +12,7 @@ class BackupHandler:
     hashingAlgorithms = {
         "md5": MD5Generator,
         "sha256": SHA256Generator,
-        "crc32": CRC32Generator
+        "sha512": SHA512Generator
     }
 
     backupStrategies = {
