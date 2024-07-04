@@ -57,7 +57,7 @@ class BackupHandler:
 
     def __readBackup(self):
         # Lets first get all the files in the backup directory
-        fileList = self.__walkDirectory(self.backupPath)
+        fileList = self.backupStrategy.Walk(self.backupPath)
 
         # Now lets open each file and hash it
         self.backupDict = self.__hashFileList(fileList, self.backupPath)
@@ -73,18 +73,6 @@ class BackupHandler:
             hashedData = self.hashAlgorithm.hashFile(fileData)
             fileList[file]["hash"] = hashedData
 
-        return fileList
-
-    def __walkDirectory(self, path: str) -> dir:
-        fileList = {}
-        for dirpath, _, filenames in os.walk(path):
-            for file_name in filenames:
-                #fileList.append(dirpath.replace(path, "") + "/" + file_name)
-                fileList[dirpath.replace(path, "") + "/" + file_name] = {
-                    "path": dirpath.replace(path, ""),
-                    "file": file_name
-                }
-        
         return fileList
     
     def __writeBackup(self, filesToBackup: dict, sourceDict: dict):
@@ -132,7 +120,7 @@ class BackupHandler:
         sourceDict = {}
 
         # Lets first get all the files in the source directory
-        fileList = self.__walkDirectory(self.sourcePath)
+        fileList = self.backupStrategy.Walk(self.sourcePath)
 
         # Now lets open each file and hash it
         sourceDict = self.__hashFileList(fileList, self.sourcePath)

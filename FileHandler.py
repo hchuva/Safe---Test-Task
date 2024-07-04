@@ -47,3 +47,15 @@ class FileSystemHandler:
             if len(os.listdir(dirpath)) == 0:
                 emptyDirList.append(dirpath)
         return emptyDirList
+    
+    @staticmethod
+    def Walk(path: str) -> dict:
+        fileList = {}
+        for dirpath, _, filenames in os.walk(path):
+            for file_name in filenames:
+                fileList[dirpath.replace(path, "") + "/" + file_name] = {
+                    "path": dirpath.replace(path, ""),
+                    "file": file_name
+                }
+        
+        return fileList
