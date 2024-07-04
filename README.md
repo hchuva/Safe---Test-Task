@@ -1,5 +1,7 @@
 # Safe Test-Task
 
+A simple directory replication tool made as a test task.
+
 ## Usage:
 
 `python3 safe.py start [-i INTERVAL] [-b BACKUP] [-s SOURCE] [-a ALGO] [-m MANAGER] [-l LOG]`
