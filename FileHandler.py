@@ -3,7 +3,6 @@ import os
 # File Handlers define how we read and write files. This means we can either manage files using our file system, or we can manage files using a database.
 
 #TODO: Merge SaveFile and CreateFile into one function
-#TODO: Create a Cleanup function that will remove any empty directory
 #TODO: Create a Walk function that returns every file in a directory
 
 class FileSystemHandler:
@@ -40,3 +39,11 @@ class FileSystemHandler:
     @staticmethod
     def DeleteDirectory(path: str):
         os.rmdir(path)
+
+    @staticmethod
+    def GetEmptyDirectories(path: str) -> list:
+        emptyDirList = []
+        for dirpath, _, _ in os.walk(path):
+            if len(os.listdir(dirpath)) == 0:
+                emptyDirList.append(dirpath)
+        return emptyDirList

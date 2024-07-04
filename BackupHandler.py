@@ -7,8 +7,6 @@ from FileHandler import FileSystemHandler
 
 logger = logging.getLogger('backup')
 
-#TODO: Remove config fil code
-#TODO: Use the FileHandler Cleanup function to remove empty directories
 #TODO: Use the FileHandler Walk function to get all files in a directory
 
 class BackupHandler:
@@ -121,10 +119,9 @@ class BackupHandler:
             self.backupDict.pop(i)
 
         # Do some cleanup, because its likely we will end up with empty folders
-        for dirpath, _, _ in os.walk(self.backupPath):
-            if len(os.listdir(dirpath)) == 0:
-                logger.info("Deleting empty directory: %s", dirpath)
-                self.backupStrategy.DeleteDirectory(dirpath)
+        for dir in self.backupStrategy.GetEmptyDirectories(self.backupPath):
+            logger.info("Deleting empty directory: %s", dir)
+            self.backupStrategy.DeleteDirectory(dir)
 
         return totalFileChange
     
