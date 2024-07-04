@@ -2,9 +2,6 @@ import hashlib
 
 # Hash generators for different algorithms
 
-#TODO: Delete CRC32Generator
-#TODO: Implement a SHA512Generator
-
 class MD5Generator:
 
     @staticmethod
@@ -17,8 +14,8 @@ class SHA256Generator:
     def hashFile(data: str):
         return hashlib.sha256(data.encode()).hexdigest()
 
-class CRC32Generator:
-    
+class SHA512Generator:
+
     @staticmethod
     def hashFile(data: str):
-        return hashlib.crc32(data.encode()).hexdigest()
+        return hashlib.sha512(data.encode()).hexdigest()
