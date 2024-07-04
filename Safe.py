@@ -14,12 +14,13 @@ def main():
     backupStarter.add_argument("-s", "--source", help="Source directory")
     backupStarter.add_argument("-a", "--algo", help="Hashing algorithm to use", default="md5")
     backupStarter.add_argument("-m", "--manager", help="Backup manager to use", default="fileSystem")
+    backupStarter.add_argument("-l", "--log", help="Log file", default="backup.log")
 
     args = parser.parse_args()
     args.backup = args.backup.rstrip("/")
     args.source = args.source.rstrip("/")
 
-    logger = setupLogging()
+    logger = setupLogging(args.log)
 
     logger.info("Parsing config file")
 
@@ -36,7 +37,7 @@ def main():
         logger.info("Continuous backup stopped")
     
 
-def setupLogging():
+def setupLogging(logFile: str):
 
     # Create a logger
     logger = logging.getLogger("backup")
@@ -47,7 +48,7 @@ def setupLogging():
     ch.setLevel(logging.DEBUG)
 
     # Create a file handler
-    fh = logging.FileHandler("backup.log")
+    fh = logging.FileHandler(logFile)
     fh.setLevel(logging.DEBUG)
 
     # Create a formatter
