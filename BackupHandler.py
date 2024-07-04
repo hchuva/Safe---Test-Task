@@ -25,7 +25,6 @@ class BackupHandler:
 
     def __init__(self, backupInterval: int, backupPath: str = "", sourcePath: str = "", hashAlgorithm: str = "md5", backupStrategy: str = "fileSystem"):
         logger.info("Initializing Backup Handler")
-        #self.readConfig(config)
 
         self.backupInterval = backupInterval
         self.backupPath = backupPath
@@ -38,13 +37,6 @@ class BackupHandler:
 
         # Create the tim tracking variable
         self.lastBackup = time.time()
-        
-    def readConfig(self, config: ConfigParser):
-        self.backupPath = config["DEFAULT"]["backupPath"]
-        self.sourcePath = config["DEFAULT"]["sourcePath"]
-        self.hashAlgorithm = self.__getHashingAlgorithm(config["DEFAULT"]["hashAlgorithm"])
-        self.backupStrategy = self.__getBackupStrategy(config["DEFAULT"]["backupStrategy"])
-
 
     def __getHashingAlgorithm(self, hashType: str):
         if hashType not in self.hashingAlgorithms:

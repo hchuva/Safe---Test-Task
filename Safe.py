@@ -9,7 +9,6 @@ def main():
     subparsers = parser.add_subparsers(help="Backup commands")
 
     backupStarter = subparsers.add_parser("start", help="Start the backup cycle")
-    #backupStarter.add_argument("-c", "--config", help="Path to the config file")
     backupStarter.add_argument("-i", "--interval", help="Interval between backup cycles in seconds")
     backupStarter.add_argument("-b", "--backup", help="Backup directory")
     backupStarter.add_argument("-s", "--source", help="Source directory")
@@ -23,9 +22,6 @@ def main():
     logger = setupLogging()
 
     logger.info("Parsing config file")
-
-    #configFile = configparser.ConfigParser()
-    #configFile.read(args.config)
 
     logger.info("Backup interval was set to %s seconds" % args.interval)
     logger.info("Backup directory was set to %s" % args.backup)
