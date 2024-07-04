@@ -2,9 +2,6 @@ import os
 
 # File Handlers define how we read and write files. This means we can either manage files using our file system, or we can manage files using a database.
 
-#TODO: Merge SaveFile and CreateFile into one function
-#TODO: Create a Walk function that returns every file in a directory
-
 class FileSystemHandler:
 
     @staticmethod

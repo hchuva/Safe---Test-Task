@@ -7,8 +7,6 @@ from FileHandler import FileSystemHandler
 
 logger = logging.getLogger('backup')
 
-#TODO: Use the FileHandler Walk function to get all files in a directory
-
 class BackupHandler:
 
     hashingAlgorithms = {
@@ -65,10 +63,6 @@ class BackupHandler:
     def __hashFileList(self, fileList: dict, path: str):
         
         for file in fileList:
-            #with open(path + "/" + file, "r") as f:
-            #    data = f.read()
-            #    hashedData = self.hashAlgorithm.hashFile(data)
-            #    hashedFiles[file] = hashedData
             fileData, _ = self.backupStrategy.ReadFile(path + "/" + file)
             hashedData = self.hashAlgorithm.hashFile(fileData)
             fileList[file]["hash"] = hashedData
